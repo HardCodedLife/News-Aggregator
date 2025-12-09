@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+langchain
+langchain-community
+langchain-openai
+llama-index
+sentence-transformers
+psycopg2-binary
+pgvector
+requests

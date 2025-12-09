@@ -1,0 +1,75 @@
+services:
+  # =========================================
+  # SERVICE 1: THE BRAIN (Ollama LLM)
+  # =========================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434" # Expose Ollama API port
+    volumes:
+      - ollama_storage:/root/.ollama # Persist Ollama data
+    restart: always
+
+  # ==========================================
+  # SERVICE 2: THE MEMORY (Postgres + Vector)
+  # ==========================================
+  db:
+    image: pgvector/pgvector:pg16 #Special Postgres image with vector support
+    container_name: vector_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vectordb
+    ports:
+      - "5432:5432" # Expose Postgres port
+    volumes:
+      - db_data:/var/lib/postgresql/data # Persist database data
+    restart: always
+
+  # ==========================================
+  # SERVICE 3: THE BACKEND (Python/FastAPI)
+  # ==========================================
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_service
+    volumes:
+      - ./backend:/app # "Live Reload": Code changes reflected immediately
+      - huggingface_cache:/root/.cache/huggingface # Cache for Hugging Face models # SAVE YOUR 24GB MODEL HERE
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/vectordb
+      - OLLAMA_API_URL=http://ollama:11434
+    ports:
+      - "8000:8000" # Expose backend API port
+    depends_on:
+      - ollama
+      - db
+    restart: always
+
+  # ==========================================
+  # SERVICE 4: THE FRONTEND (React)
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_service
+    ports:
+      - "3000:5173" # Expose frontend port
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      #CRITCAL: Prevents host node_modules from overwriting container's node_modules
+      - /app/node_modules
+    command: npm run dev -- --host
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  ollama_storage:
+  db_data:
+  huggingface_cache:

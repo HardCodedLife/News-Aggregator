@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+docker-compose.override.yml
 .Python
 build/
 develop-eggs/
@@ -137,7 +138,7 @@ celerybeat.pid
 # Environments
 .env
 .envrc
-.venv
+.venv/
 env/
 venv/
 ENV/
@@ -205,3 +206,20 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# --- Node/Next.js (Frontend) ---
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/.DS_Store
+frontend/*.log
+
+# --- Project Specific (Data) ---
+# If you ever map a local folder to your DB, ignore it here
+docker-compose.override.yml
+db_data/
+ollama_data/
+ai_models/

@@ -1,16 +1,38 @@
-# 📰 AI-Powered News Aggregator (RAG)
-A local Retrieval-Augmented Generation (RAG) platform that allows users to ingest news articles and chat with an AI to gain insights based **strictly** on the ingested content.
+# AI-Powered News Aggregator ([RAG][1])
+A local Retrieval-Augmented Generation ([RAG][1]) platform that allows users to ingest news articles and chat with an AI to gain insights based **strictly** on the ingested content.  
 
-## 🏗 Tech Stack
+# Table of Contents
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+  - [1. Prerequisites](#1-prerequisites)
+  - [2. Installation](#2-installation)
+- [First Run Setup (Crucial!)](#first-run-setup-crucial)
+  - [1. Pull the LLM (Ollama)](#1-pull-the-llm-ollama)
+  - [2. Verify Database Schema (If changing models)](#2-verify-database-schema-if-changing-models)
+- [Future Roadmap](#future-roadmap)
+  - [1. Migration to LlamaIndex](#1-migration-to-llamaindex)
+  - [2. Advanced Embedding Management](#2-advanced-embedding-management)
+  - [3. Automated Data Pipeline](#3-automated-data-pipeline)
+- [Usage Guide](#usage-guide)
+  - [Access Points](#access-points)
+  - [How to use the App](#how-to-use-the-app)
+- [Troubleshooting](#troubleshooting)
+  - [Dimension mismatch Error (384 vs 3072)](#dimension-mismatch-error-384-vs-3072)
+  - [Container name already in use](#container-name-already-in-use)
+  - [Frontend says "Vite requires Node.js version..."](#frontend-says-vite-requires-nodejs-version)
+- [Uninstalling / Cleanup](#uninstalling--cleanup)
+- [Project Structure](#project-structure)
+
+## Tech Stack
 * **Frontend:** React + Typescript (Vite)
-* ** Backend:** Python (FastAPI + LangChain)
+* **Backend:** Python (FastAPI + LangChain)
 * **Database:** PostgreSQL (pgvector)
-* **AI Engine:** Ollama (Local LLM) + HuggingFace (Embeddings)
+* **AI Engine:** Ollama (Local [LLM][2]) + HuggingFace ([Embeddings][3])
 * **Infrastructure:** Docker Compose
 
 --
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Prerequisites
 - Docker Desktop (Running)
@@ -28,7 +50,7 @@ docker-compose up -d --build
 
 -----
 
-## ⚙️ First Run Setup (Crucial\!)
+## First Run Setup (Crucial\!)
 
 After the containers are running, you must perform these *one-time manual steps* to initialize the AI models.
 
@@ -60,7 +82,7 @@ If you ever switch to a larger model (e.g., tencent/KaLM-Embedding-Gemma3-12B-25
 
 -----
 
-## 🔮 Future Roadmap
+## Future Roadmap
 
 This project is currently in the **Prototype Phase** (Phase 1). The following upgrades are planned for Phase 2:
 
@@ -87,7 +109,7 @@ This project is currently in the **Prototype Phase** (Phase 1). The following up
 
 -----
 
-## 🖥️ Usage Guide
+## Usage Guide
 
 ### Access Points
 
@@ -109,7 +131,7 @@ This project is currently in the **Prototype Phase** (Phase 1). The following up
 
 -----
 
-## 🛠 Troubleshooting
+## Troubleshooting
 
 ### "Dimension mismatch" Error (384 vs 3072)
 
@@ -151,7 +173,7 @@ docker-compose up -d --build frontend
 
 -----
 
-## 🗑 Uninstalling / Cleanup
+## Uninstalling / Cleanup
 
 If you want to completely remove the project, including all data, models, and Docker images, follow these steps.
 
@@ -170,7 +192,7 @@ docker system prune -f
 
 -----
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 news-aggregator/
@@ -186,4 +208,10 @@ news-aggregator/
     ├── package.json         # React dependencies
     └── src/                 # React Source Code
 ```
- 
+
+---
+
+## 
+[1]: https://en.wikipedia.org/wiki/Retrieval-augmented_generation
+[2]: https://en.wikipedia.org/wiki/Large_language_model
+[3]: https://en.wikipedia.org/wiki/Word_embedding

@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     # AI Configuration
     # We use a standard OpenAI-compatible URL structure for Ollama
-    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_API_URL", "http://ollama:11434")
+    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_API_URL", "https://ollama.claudeshannon.site")
     
     # Models
     # LLM: The brain that answers

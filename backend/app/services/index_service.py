@@ -27,9 +27,12 @@ class RAGService:
         )
 
         # 2. LLM (Ollama) - The Brain
+        # Adding context_window parameter bypasses the /api/show metadata check
+        # which was causing ShowResponse model_info validation errors
         Settings.llm = Ollama(
             model=settings.MODEL_NAME,
             base_url=settings.OLLAMA_BASE_URL,
+            context_window=4096,  # Bypass metadata check
             request_timeout=120.0
         )
 

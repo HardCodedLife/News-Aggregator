@@ -16,9 +16,15 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 5. Install Python dependencies
+# 5. Install Python dependencies in correct order
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+##Try to solve dependencies version problem
+#COPY requirements_names.txt .
+#RUN pip install --upgrade pip && \
+#	pip install -r requirements_names.txt
 
 # 6. Copy the application code
 COPY . .
